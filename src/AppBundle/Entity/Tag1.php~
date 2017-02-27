@@ -1,0 +1,41 @@
+<?php
+
+namespace AppBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Category;
+
+/** 
+ * Tag 
+ *  @ORM\Table(name="tag1") 
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TagRepository") 
+ */ 
+class Tag1 {
+     /**    
+      * @var int   
+      *  @ORM\Column(name="id", type="integer")   
+      * @ORM\Id    
+      *  @ORM\GeneratedValue(strategy="AUTO")    
+      *   
+      */
+    protected $id;
+    
+     /** 
+      *  @ORM\ManyToMany(targetEntity="Category", mappedBy="tags")     
+      */    
+    protected $categories;
+     /**   
+      *  @return ArrayCollection     
+      */
+    public function __construct(){     
+        $this->categories = new ArrayCollection();   
+        }
+       
+    /**   
+     * 
+     * @var string
+     * 
+     *@ORM\Column(name="tagname", type="string")     
+     */  
+    protected $tagname;    
+}

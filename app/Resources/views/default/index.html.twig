@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block body %}    
+    {{ form_start(form) }}     
+    {{ form_row(form.categoryname) }} 
+    <div class="tags"  data-prototype="{{ form_row(form.tags.vars.prototype.tagname,  {'attr':{'style':'width:300px'}})|e }}">     
+    {{ form_row(form.tags) }}  
+    </div>       
+    {{ form_row(form.save) }}   
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css"> 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"> </script> 
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script> 
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script>       
+    $(document).ready(function() {  
+        $("#category_categoryname").change(function(){
+        var cat_element = document.getElementById("category_categoryname");
+        var category_type = cat_element.options[cat_element.selectedIndex].value;
+       {#alert("The text has been changed".cat_element);#}
+        $.ajax({         
+            type: "POST", 
+            url: Routing.generate('homepage'),  
+            contentType: 'application/x-www-form-urlencoded',
+            data: { cat_id : category_type},          
+            success: function (result, status, xhr) {  
+             var tag_options = document.getElementById("category_categoryname").options;
+             for(var i = 0; i < tag_options.length; i++){        
+                 tag_options[i].selected = false;    
+             }        
+             var tags_arr = JSON.parse(result); 
+             var tags_val_arr = [];       
+             for(var i = 0; i < tags_arr.length; i++){  
+                 tags_val_arr[i] = tags_arr[i].t_id; 
+             }             
+             $("#category_tags___name___tagname").val(tags_val_arr);
+             $("#category_tags___name___tagname").trigger("chosen:updated");     
+             $("#category_categoryname").val(category_type); 
+            
+            },
+                error: function(xhr, status, error) {     
+                    console.log(status);       
+                }         
+            });
+        });
+     $collectionHolder = $('div.tags');  
+     var prototype = $collectionHolder.data('prototype');         
+     $tagsField = $('div#category_tags');      
+     var $newtagsField = $tagsField.append(prototype);
+    $("#category_tags___name___tagname").chosen({  
+    display_selected_options: false,    
+    width: "22%",          
+    placeholder_text_multiple: 'Select Tags', 
+    no_results_text: "Oops, no tags found!"  
+});
+
+  }); 
+    </script> 
+{% endblock %}
