@@ -21,27 +21,27 @@ class __TwigTemplate_67550975b647b6a023d21229e09cabbcd55aade027a301b9774a7d1fd3f
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_c9658a2f036217740beefc9c3ff8a196edf267311999b288557c42980bb9f8a7 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_c9658a2f036217740beefc9c3ff8a196edf267311999b288557c42980bb9f8a7->enter($__internal_c9658a2f036217740beefc9c3ff8a196edf267311999b288557c42980bb9f8a7_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/success.html.twig"));
+        $__internal_875851fe37e35ebca9943cf1a011ad2cdc499d875de11c149ce786af8335d81b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_875851fe37e35ebca9943cf1a011ad2cdc499d875de11c149ce786af8335d81b->enter($__internal_875851fe37e35ebca9943cf1a011ad2cdc499d875de11c149ce786af8335d81b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/success.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_c9658a2f036217740beefc9c3ff8a196edf267311999b288557c42980bb9f8a7->leave($__internal_c9658a2f036217740beefc9c3ff8a196edf267311999b288557c42980bb9f8a7_prof);
+        $__internal_875851fe37e35ebca9943cf1a011ad2cdc499d875de11c149ce786af8335d81b->leave($__internal_875851fe37e35ebca9943cf1a011ad2cdc499d875de11c149ce786af8335d81b_prof);
 
     }
 
     // line 2
     public function block_body($context, array $blocks = array())
     {
-        $__internal_9bd641a13638481c78a6ebc2c731da5752d3f63fc7ab1bb304359da9d8851a93 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_9bd641a13638481c78a6ebc2c731da5752d3f63fc7ab1bb304359da9d8851a93->enter($__internal_9bd641a13638481c78a6ebc2c731da5752d3f63fc7ab1bb304359da9d8851a93_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_165d6ca52018e9449f95dbb6c8d965c52974be48f242c74120a25ade4897aa18 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_165d6ca52018e9449f95dbb6c8d965c52974be48f242c74120a25ade4897aa18->enter($__internal_165d6ca52018e9449f95dbb6c8d965c52974be48f242c74120a25ade4897aa18_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        echo "    
-    <h1>Success!</h1>   
+        echo " 
+    <h1>Success!</h1> 
     <p>Your details have been submitted!</p> 
 ";
         
-        $__internal_9bd641a13638481c78a6ebc2c731da5752d3f63fc7ab1bb304359da9d8851a93->leave($__internal_9bd641a13638481c78a6ebc2c731da5752d3f63fc7ab1bb304359da9d8851a93_prof);
+        $__internal_165d6ca52018e9449f95dbb6c8d965c52974be48f242c74120a25ade4897aa18->leave($__internal_165d6ca52018e9449f95dbb6c8d965c52974be48f242c74120a25ade4897aa18_prof);
 
     }
 
@@ -71,8 +71,8 @@ class __TwigTemplate_67550975b647b6a023d21229e09cabbcd55aade027a301b9774a7d1fd3f
     public function getSourceContext()
     {
         return new Twig_Source("{% extends 'base.html.twig' %}
-{% block body %}    
-    <h1>Success!</h1>   
+{% block body %} 
+    <h1>Success!</h1> 
     <p>Your details have been submitted!</p> 
 {% endblock %}", "default/success.html.twig", "C:\\xampp\\htdocs\\MtoMEmbCollecForm\\app\\Resources\\views\\default\\success.html.twig");
     }

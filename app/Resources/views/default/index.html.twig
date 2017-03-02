@@ -7,7 +7,7 @@
     </div>       
     {{ form_row(form.save) }}   
     {{ form_end(form) }}
-{% endblock %}
+{% endblock %}  
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css"> 
@@ -23,13 +23,13 @@
         $("#category_categoryname").change(function(){
         var cat_element = document.getElementById("category_categoryname");
         var category_type = cat_element.options[cat_element.selectedIndex].value;
-       {#alert("The text has been changed".cat_element);#}
         $.ajax({         
             type: "POST", 
-            url: Routing.generate('homepage'),  
+            {#url: Routing.generate('homepage'),#}  
             contentType: 'application/x-www-form-urlencoded',
-            data: { cat_id : category_type},          
+            data: { cat_id : category_type}, 
             success: function (result, status, xhr) {  
+            // alert(result.success);   
              var tag_options = document.getElementById("category_categoryname").options;
              for(var i = 0; i < tag_options.length; i++){        
                  tag_options[i].selected = false;    
@@ -46,7 +46,7 @@
             },
                 error: function(xhr, status, error) {     
                     console.log(status);       
-                }         
+                } 
             });
         });
      $collectionHolder = $('div.tags');  

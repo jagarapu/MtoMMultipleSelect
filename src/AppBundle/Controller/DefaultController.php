@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route; 
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller; 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Category;
 use AppBundle\Form\CategoryType;
@@ -15,17 +16,13 @@ class DefaultController extends Controller {
      * @Route("/", name="homepage")   
      */  
     public function indexAction(Request $request) {   
-        $em = $this->getDoctrine()->getManager();   
-//        $req = $request->isXmlHttpRequest();
-//        var_dump($req);
-//        exit;
-        if($request->isXmlHttpRequest()){
-            
-            $categoryId = $request->request->get('cat_id');                                
+        $em = $this->getDoctrine()->getManager();         
+        if($request->isXmlHttpRequest()){             
+            $categoryId = $request->request->get('cat_id');         
             $tags = $this->getDoctrine()->getRepository('AppBundle:Tag') ->getTagsByCategory($categoryId);
-           return $tags_json = new Response(json_encode($tags));   
-           }
-        $logger = $this->get('logger');    
+            return $tags_json = new Response(json_encode($tags));   
+           } 
+//           else { echo 'This is not ajax!';}                           
         $category = new Category(); 
         $selectedcategory = $em->getRepository('AppBundle:Category')->findOneBy(array('id' => 1));
         $form = $this->createForm(new CategoryType($selectedcategory), $category);
@@ -45,7 +42,7 @@ class DefaultController extends Controller {
                 foreach ($tags_arr as $tag) {     
                 $cat->addTag($tag);
                     }          
-              }
+              }   
             $em->persist($cat);  
             $em->flush();
             return $this->redirectToRoute('successpage');   
