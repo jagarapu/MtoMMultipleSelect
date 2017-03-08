@@ -25,7 +25,7 @@
         var category_type = cat_element.options[cat_element.selectedIndex].value;
         $.ajax({         
             type: "POST", 
-            {#url: Routing.generate('homepage'),#}  
+            url: Routing.generate('homepage'),
             contentType: 'application/x-www-form-urlencoded',
             data: { cat_id : category_type}, 
             success: function (result, status, xhr) {  
@@ -35,22 +35,22 @@
                  tag_options[i].selected = false;    
              }        
              var tags_arr = JSON.parse(result); 
-             var tags_val_arr = [];       
+             var tags_val_arr = [];                     
              for(var i = 0; i < tags_arr.length; i++){  
                  tags_val_arr[i] = tags_arr[i].t_id; 
-             }             
+                 //alert(tags_arr[0].t_id); 
+             }  
              $("#category_tags___name___tagname").val(tags_val_arr);
              $("#category_tags___name___tagname").trigger("chosen:updated");     
              $("#category_categoryname").val(category_type); 
-            
-            },
+            },    
                 error: function(xhr, status, error) {     
-                    console.log(status);       
+                    console.log(status);
                 } 
             });
         });
-     $collectionHolder = $('div.tags');  
-     var prototype = $collectionHolder.data('prototype');         
+     $collectionHolder = $('div.tags');
+     var prototype = $collectionHolder.data('prototype');
      $tagsField = $('div#category_tags');      
      var $newtagsField = $tagsField.append(prototype);
     $("#category_tags___name___tagname").chosen({  

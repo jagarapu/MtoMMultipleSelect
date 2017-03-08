@@ -13,17 +13,23 @@ use AppBundle\Form\TaskType;
 
 class DefaultController extends Controller {   
     /**   
-     * @Route("/", name="homepage")   
+     * @Route("/", name="homepage", options = { "expose" = true })   
      */  
     public function indexAction(Request $request) {   
         $em = $this->getDoctrine()->getManager();         
-        if($request->isXmlHttpRequest()){             
-            $categoryId = $request->request->get('cat_id');         
-            $tags = $this->getDoctrine()->getRepository('AppBundle:Tag') ->getTagsByCategory($categoryId);
-            return $tags_json = new Response(json_encode($tags));   
-           } 
-//           else { echo 'This is not ajax!';}                           
-        $category = new Category(); 
+        if($request->isXmlHttpRequest()){  
+            $categoryId = $request->request->get('cat_id');  
+            $repository = $em->getRepository('AppBundle:Tag');
+            $tags = $repository->createQueryBuilder('t')
+                        ->innerJoin('t.categories', 'c')
+                        ->where('c.id = :category_id')
+                        ->setParameter('category_id', $categoryId)
+                        ->getQuery()->getResult();
+//            $tags = $this->getDoctrine()->getRepository('AppBundle:Tag') ->getTagsByCategory($categoryId);
+            return $tags_json = new Response(json_encode($tags)); 
+           }                           
+        $category = new Category();        
+       // $logger = $this->get('logger');
         $selectedcategory = $em->getRepository('AppBundle:Category')->findOneBy(array('id' => 1));
         $form = $this->createForm(new CategoryType($selectedcategory), $category);
         $form->handleRequest($request);       
@@ -35,12 +41,10 @@ class DefaultController extends Controller {
             $cat->removeTag($related_tags_arr[$k]);                      
                 }
             $selected_tags = $category->getTags()[0];
-//            $log1 = $logger->info('selected_tags'. $selected_tags);
-//            var_dump($log1);exit;
             if (!empty($selected_tags)) {         
                 $tags_arr = $selected_tags->getTagname(); 
                 foreach ($tags_arr as $tag) {     
-                $cat->addTag($tag);
+                    $cat->addTag($tag);
                     }          
               }   
             $em->persist($cat);  

@@ -15,7 +15,7 @@ class TagType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options){
           $builder->add('tagname', EntityType::class, array(  
               'class' => 'AppBundle:Tag',
-              'query_builder' => function(EntityRepository $er) {
+              'query_builder' => function(EntityRepository $er) {  
                return $er->createQueryBuilder('t')    
                        ->orderBy('t.id', 'ASC');       
                },           

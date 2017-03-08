@@ -1,1 +1,1 @@
-{"successpage":{"tokens":[["text","\/success"]],"defaults":[],"requirements":[],"hosttokens":[]}}
+{"homepage":{"tokens":[["text","\/"]],"defaults":[],"requirements":[],"hosttokens":[]},"successpage":{"tokens":[["text","\/success"]],"defaults":[],"requirements":[],"hosttokens":[]}}
