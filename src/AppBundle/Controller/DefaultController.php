@@ -26,11 +26,9 @@ class DefaultController extends Controller {
                         ->where('c.id = :category_id')
                         ->setParameter('category_id', $categoryId)
                         ->getQuery()->getResult();
-//            $tags = $this->getDoctrine()->getRepository('AppBundle:Tag') ->getTagsByCategory($categoryId);
             return $tags_json = new Response(json_encode($tags)); 
            }                           
         $category = new Category();        
-       // $logger = $this->get('logger');
         $selectedcategory = $em->getRepository('AppBundle:Category')->findOneBy(array('id' => 1));
         $form = $this->createForm(new CategoryType($selectedcategory), $category);
         $form->handleRequest($request);       
