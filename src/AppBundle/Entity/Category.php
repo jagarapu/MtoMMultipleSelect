@@ -27,7 +27,8 @@ class Category {
          protected $categoryname; 
          
          /** 
-           * @ORM\ManyToMany(targetEntity="Tag", inversedBy="categories")    
+           * @ORM\ManyToMany(targetEntity="Tag", inversedBy="categories")
+           * @ORM\JoinTable(name="category_tag")     
            */   
          protected $tags;
            /**

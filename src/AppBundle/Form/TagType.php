@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TagType extends AbstractType {  
     protected $tag;
     public function __construct(array $tag = array()) {     
-        $this->tag = $tag;   
+        $this->tag = $tag;
        }   
     public function buildForm(FormBuilderInterface $builder, array $options){
           $builder->add('tagname', EntityType::class, array(  

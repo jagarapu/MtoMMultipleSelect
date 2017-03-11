@@ -17,9 +17,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> </script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"> </script> 
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script> 
+    
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-    <script>       
-    $(document).ready(function() {  
+    <script src="{{ asset('bundles/app/js/main.js') }}"></script> 
+{#    <script>
+        $(document).ready(function() {  
         $("#category_categoryname").change(function(){
         var cat_element = document.getElementById("category_categoryname");
         var category_type = cat_element.options[cat_element.selectedIndex].value;
@@ -27,9 +29,9 @@
             type: "POST", 
             url: Routing.generate('homepage'),
             contentType: 'application/x-www-form-urlencoded',
-            data: { cat_id : category_type}, 
+            data: { cat_id : category_type},     
             success: function (result, status, xhr) {  
-            // alert(result.success);   
+             // alert(result.success);   
              var tag_options = document.getElementById("category_categoryname").options;
              for(var i = 0; i < tag_options.length; i++){        
                  tag_options[i].selected = false;    
@@ -38,7 +40,7 @@
              var tags_val_arr = [];                     
              for(var i = 0; i < tags_arr.length; i++){  
                  tags_val_arr[i] = tags_arr[i].t_id; 
-                 //alert(tags_arr[0].t_id); 
+                 alert(tags_arr[0].t_id);  
              }  
              $("#category_tags___name___tagname").val(tags_val_arr);
              $("#category_tags___name___tagname").trigger("chosen:updated");     
@@ -60,6 +62,7 @@
     no_results_text: "Oops, no tags found!"  
 });
 
-  }); 
-    </script> 
+  }); #}
+    </script>       
+  {#<script src="{{ asset('bundles/appbundle/js/main.js') }}"></script>#}
 {% endblock %}

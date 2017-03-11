@@ -16,12 +16,13 @@ class DefaultController extends Controller {
      * @Route("/", name="homepage", options = { "expose" = true })   
      */  
     public function indexAction(Request $request) {   
-        $em = $this->getDoctrine()->getManager();         
+         $em = $this->getDoctrine()->getManager();
         if($request->isXmlHttpRequest()){  
             $categoryId = $request->request->get('cat_id');  
             $repository = $em->getRepository('AppBundle:Tag');
             $tags = $repository->createQueryBuilder('t')
                         ->innerJoin('t.categories', 'c')
+                        ->select('c.id as category_id, t.id as tag_id')
                         ->where('c.id = :category_id')
                         ->setParameter('category_id', $categoryId)
                         ->getQuery()->getResult();
